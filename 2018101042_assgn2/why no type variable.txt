@@ -1,0 +1,22 @@
+type variable is a luxury none of us should ever dream of having right now.
+
+What is type?
+
+Declared initially in the structure struct ongoing_processes, it was used to store the current status of the process or the job. 
+If type is 0, then the process is invalid or has been killed (no longer exists).
+If type is 1, then the process is a foreground process.
+If type is 2, then the process is a background process.
+If type is 3, then the process is a stopped process.
+
+Any issues with type? Did it bite you?
+
+No! Variables, unlike dogs, don't bite. They hurt you in other means (SEGFAULT and redundancy issues (I don't know what that means)).
+On a serious note, it is becoming difficult to track that variable as it can change multiple times, by external reasons. 
+Take the 'good old' vim as an example. It stops even without you noticing that it has stopped. And since you didn't change its type, the shell won't be able to make it foreground, or evem wait till it dies out. Lol.
+So type variable, good bye.
+
+So what changes can be expected?
+
+-- main.c : So, we need not update the all_jobs array in main. (That's too much savings right?) [was not implemented here as time...]. 
+-- interrupt_handler.c : Here we need not mess up with the type variables. When a process is killed, we can just be like, "Hey! the process died, I can't find your status, let me put your pid as -1 so that noone else can mess up with you. 
+-- fg.c : Here we would have messed up everything, but thanks to this great great idea, we need not care about type as we make the process foreground and it stops
